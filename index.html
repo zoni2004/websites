@@ -1,0 +1,449 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Binori Spa &amp; Salon — Karachi</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,500&family=Sora:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --indigo:#1B2A4A;
+    --indigo-deep:#111B30;
+    --madder:#9C3B2E;
+    --madder-deep:#7C2E24;
+    --ivory:#F4EEE3;
+    --paper:#FBF7EF;
+    --ochre:#CB9A3E;
+    --ochre-soft:#E4C889;
+    --ink:#211C18;
+    --ink-soft:#5B5147;
+    --line: rgba(33,28,24,0.14);
+    --silver:#D9DEE6;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0; background:var(--ivory); color:var(--ink);
+    font-family:'Sora', sans-serif; font-weight:400; line-height:1.65;
+    -webkit-font-smoothing:antialiased;
+  }
+  h1,h2,h3,.display{
+    font-family:'Fraunces', serif; font-optical-sizing:auto;
+    font-weight:600; letter-spacing:-0.01em; margin:0; color:var(--indigo);
+  }
+  a{color:inherit; text-decoration:none;}
+  img,svg{display:block; max-width:100%;}
+  .mono{font-family:'IBM Plex Mono', monospace;}
+  .eyebrow{
+    font-family:'IBM Plex Mono', monospace; font-size:0.7rem;
+    letter-spacing:0.22em; text-transform:uppercase; color:var(--madder); font-weight:500;
+  }
+  .wrap{max-width:1180px; margin:0 auto; padding:0 clamp(20px,5vw,64px);}
+  section{position:relative;}
+  ::selection{background:var(--ochre-soft); color:var(--indigo-deep);}
+
+  .reveal{opacity:0; transform:translateY(22px); transition:opacity .8s ease, transform .8s ease;}
+  .reveal.in{opacity:1; transform:translateY(0);}
+  @media (prefers-reduced-motion:reduce){ .reveal{opacity:1 !important; transform:none !important; transition:none !important;} }
+
+  /* ---- ajrak-inspired border band ---- */
+  .ajrak-band{
+    height:26px; background-repeat:repeat-x; background-position:center; background-size:52px 26px;
+  }
+  .ajrak-band.top{
+    background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='52' height='26' viewBox='0 0 52 26'><rect width='52' height='26' fill='%231B2A4A'/><path d='M0 13 L13 3 L26 13 L39 3 L52 13' fill='none' stroke='%23CB9A3E' stroke-width='1.4'/><circle cx='13' cy='13' r='2.2' fill='%239C3B2E'/><circle cx='39' cy='13' r='2.2' fill='%239C3B2E'/></svg>");
+  }
+  .ajrak-band.bottom{
+    background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='52' height='26' viewBox='0 0 52 26'><rect width='52' height='26' fill='%231B2A4A'/><path d='M0 13 L13 23 L26 13 L39 23 L52 13' fill='none' stroke='%23CB9A3E' stroke-width='1.4'/><circle cx='26' cy='13' r='2.2' fill='%23F4EEE3'/></svg>");
+  }
+
+  /* ================= NAV ================= */
+  header{
+    position:fixed; top:0; left:0; right:0; z-index:100;
+    background:rgba(244,238,227,0.88); backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--line);
+  }
+  .nav{display:flex; align-items:center; justify-content:space-between; padding:16px clamp(20px,5vw,64px);}
+  .logo{font-family:'Fraunces', serif; font-size:1.5rem; font-weight:600; letter-spacing:-0.01em; color:var(--indigo);}
+  .logo span{color:var(--madder);}
+  .nav-links{display:flex; gap:34px; align-items:center;}
+  .nav-links a{font-size:0.85rem; letter-spacing:0.02em; color:var(--ink-soft); position:relative; padding:4px 0;}
+  .nav-links a:hover{color:var(--madder);}
+  .nav-links a::after{content:''; position:absolute; left:0; bottom:0; width:0; height:1px; background:var(--ochre); transition:width .3s ease;}
+  .nav-links a:hover::after{width:100%;}
+  .btn{
+    display:inline-flex; align-items:center; gap:8px; background:var(--indigo); color:var(--paper);
+    padding:11px 22px; font-size:0.82rem; letter-spacing:0.02em; border:1px solid var(--indigo);
+    cursor:pointer; transition:background .3s ease, color .3s ease, transform .2s ease;
+  }
+  .btn:hover{background:var(--indigo-deep); transform:translateY(-1px);}
+  .btn.outline{background:transparent; color:var(--indigo);}
+  .btn.outline:hover{background:var(--indigo); color:var(--paper);}
+  .btn.rust{background:var(--madder); border-color:var(--madder);}
+  .btn.rust:hover{background:var(--madder-deep); border-color:var(--madder-deep);}
+  .menu-toggle{display:none; flex-direction:column; gap:5px; background:none; border:none; cursor:pointer; padding:6px;}
+  .menu-toggle span{width:22px; height:1.5px; background:var(--indigo);}
+
+  /* ================= HERO ================= */
+  .hero{padding:60px 0 70px;}
+  .hero-inner{
+    display:grid; grid-template-columns:1.05fr 0.95fr; gap:48px; align-items:center; padding:80px 0;
+  }
+  .hero h1{font-size:clamp(2.5rem, 5vw, 4.2rem); line-height:1.06;}
+  .hero h1 em{font-style:italic; color:var(--madder); font-weight:500;}
+  .hero p.lede{margin-top:22px; max-width:440px; color:var(--ink-soft); font-size:1.05rem;}
+  .hero-actions{margin-top:32px; display:flex; gap:16px; flex-wrap:wrap;}
+  .hero-meta{margin-top:44px; display:flex; gap:34px; flex-wrap:wrap;}
+  .hero-meta div{border-left:2px solid var(--ochre); padding-left:14px;}
+  .hero-meta b{display:block; font-family:'Fraunces',serif; font-size:1.5rem; color:var(--indigo);}
+  .hero-meta small{color:var(--ink-soft); font-size:0.76rem; font-family:'IBM Plex Mono',monospace;}
+
+  /* ---- mirror grid signature ---- */
+  .mirror-panel{
+    background:var(--indigo); border-radius:2px; padding:34px;
+    display:grid; grid-template-columns:repeat(6,1fr); gap:10px; aspect-ratio:1/1; max-width:420px; margin:0 auto;
+  }
+  .mirror{
+    aspect-ratio:1/1; clip-path:polygon(50% 4%,96% 50%,50% 96%,4% 50%);
+    background:linear-gradient(135deg, #cfd8e6, #8b96a8 45%, #eef1f5 55%, #9aa5b6);
+    background-size:220% 220%;
+    background-position:var(--mx,50%) var(--my,50%);
+    transition:background-position .25s ease;
+    position:relative;
+  }
+  .mirror:nth-child(3n+1){background:linear-gradient(135deg,#e9c98a,#a8813a 45%,#f6e2b3 55%,#b58c44); background-size:220% 220%; background-position:var(--mx,50%) var(--my,50%);}
+  .mirror:nth-child(5n+2){background:linear-gradient(135deg,#c98d80,#8a3c30 45%,#e3ada2 55%,#9c3b2e); background-size:220% 220%; background-position:var(--mx,50%) var(--my,50%);}
+
+  /* ================= TICKER ================= */
+  .ticker-band{background:var(--indigo-deep); color:var(--paper); overflow:hidden; white-space:nowrap; padding:15px 0;}
+  .ticker-track{display:inline-flex; gap:48px; animation:scroll 32s linear infinite;}
+  .ticker-track span{font-family:'IBM Plex Mono',monospace; font-size:0.85rem; letter-spacing:0.05em; color:var(--ochre-soft); white-space:nowrap;}
+  .ticker-track span::after{content:'/'; color:rgba(251,247,239,0.35); margin-left:48px;}
+  @keyframes scroll{ from{transform:translateX(0);} to{transform:translateX(-50%);} }
+  @media (prefers-reduced-motion:reduce){ .ticker-track{animation:none;} }
+
+  .section-head{display:flex; justify-content:space-between; align-items:flex-end; gap:24px; margin-bottom:48px; flex-wrap:wrap;}
+  .section-head h2{font-size:clamp(2rem,3.4vw,2.8rem);}
+  .section-head p{color:var(--ink-soft); max-width:340px; font-size:0.95rem;}
+  .menu-section{padding:110px 0 90px;}
+
+  /* ================= MENU ================= */
+  .menu-grid{display:grid; grid-template-columns:repeat(2,1fr); gap:0 64px;}
+  .menu-cat{margin-bottom:56px;}
+  .cat-label{display:flex; align-items:center; gap:12px; margin-bottom:22px;}
+  .cat-label .diamond{width:9px; height:9px; background:var(--madder); transform:rotate(45deg);}
+  .cat-label h3{font-size:1.45rem; font-style:italic; font-weight:500;}
+  .menu-item{display:flex; justify-content:space-between; gap:18px; padding:16px 0; border-bottom:1px dashed var(--line);}
+  .menu-item:last-child{border-bottom:none;}
+  .menu-item .name{font-size:1.02rem; font-weight:500; color:var(--ink);}
+  .menu-item .desc{color:var(--ink-soft); font-size:0.85rem; margin-top:4px; max-width:340px;}
+  .menu-item .price{font-family:'IBM Plex Mono',monospace; font-size:0.95rem; color:var(--madder); white-space:nowrap;}
+
+  /* ================= SIGNATURE RITUAL ================= */
+  .ritual-feature{background:var(--indigo); color:var(--silver); padding:100px 0;}
+  .ritual-feature .wrap{display:grid; grid-template-columns:0.9fr 1.1fr; gap:60px; align-items:center;}
+  .ritual-feature .eyebrow{color:var(--ochre-soft);}
+  .ritual-feature h2{color:var(--paper); font-size:clamp(2.1rem,3.6vw,3rem); margin:14px 0 20px;}
+  .ritual-feature p.lede{color:rgba(217,222,230,0.8); max-width:420px; font-size:1rem;}
+  .steps{display:flex; flex-direction:column;}
+  .step{display:grid; grid-template-columns:44px 1fr; gap:18px; padding:22px 0; border-bottom:1px solid rgba(217,222,230,0.16);}
+  .step:first-child{padding-top:0;}
+  .step .num{font-family:'IBM Plex Mono',monospace; font-size:1.05rem; color:var(--ochre-soft);}
+  .step h4{font-family:'Sora',sans-serif; font-weight:500; font-size:1.02rem; color:var(--paper); margin-bottom:6px;}
+  .step p{color:rgba(217,222,230,0.72); font-size:0.9rem; margin:0;}
+
+  /* ================= TESTIMONIALS ================= */
+  .testimonial-section{padding:110px 0;}
+  .cards{display:grid; grid-template-columns:repeat(3,1fr); gap:26px;}
+  .postcard{background:var(--paper); border:1px solid var(--line); padding:32px 26px; position:relative; transform:rotate(var(--tilt,0deg)); transition:transform .3s ease, box-shadow .3s ease;}
+  .postcard:hover{transform:rotate(0deg) translateY(-4px); box-shadow:0 18px 40px rgba(33,28,24,0.1);}
+  .postcard:nth-child(1){--tilt:-1.2deg;}
+  .postcard:nth-child(2){--tilt:0.7deg;}
+  .postcard:nth-child(3){--tilt:-0.5deg;}
+  .postcard .quote{font-family:'Fraunces', serif; font-style:italic; font-size:1.2rem; font-weight:400; color:var(--ink); margin-bottom:20px;}
+  .postcard .who{font-size:0.8rem; font-family:'IBM Plex Mono',monospace; color:var(--madder);}
+  .stars{color:var(--ochre); font-size:0.85rem; margin-bottom:14px; letter-spacing:2px;}
+
+  /* ================= LOCATIONS ================= */
+  .locations{padding:0 0 110px;}
+  .loc-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:26px;}
+  .loc-card{background:var(--paper); border:1px solid var(--line); padding:30px; border-top:3px solid var(--madder);}
+  .loc-card.flagship{border-top-color:var(--ochre);}
+  .loc-card:nth-child(3){border-top-color:var(--indigo);}
+  .loc-card h3{font-size:1.45rem; margin-bottom:6px; display:flex; align-items:center; gap:10px;}
+  .flagship-tag{font-family:'IBM Plex Mono',monospace; font-size:0.62rem; letter-spacing:0.08em; text-transform:uppercase; background:var(--ochre); color:var(--indigo-deep); padding:3px 8px;}
+  .loc-card .addr{color:var(--ink-soft); font-size:0.88rem; margin:6px 0 16px;}
+  .loc-card .hours{font-size:0.82rem; color:var(--ink-soft); border-top:1px dashed var(--line); padding-top:14px; font-family:'IBM Plex Mono',monospace;}
+  .loc-card .hours b{color:var(--ink); font-weight:500; font-family:'Sora',sans-serif;}
+
+  /* ================= CTA ================= */
+  .cta-band{background:var(--indigo-deep); color:var(--paper); padding:80px 0; text-align:center;}
+  .cta-band h2{color:var(--paper); font-size:clamp(2rem,4vw,3rem); margin-bottom:16px;}
+  .cta-band p{color:rgba(251,247,239,0.72); max-width:440px; margin:0 auto 30px; font-size:1rem;}
+  .cta-actions{display:flex; gap:16px; justify-content:center; flex-wrap:wrap;}
+
+  /* ================= FOOTER ================= */
+  footer{padding:56px 0 30px; background:var(--ivory);}
+  .footer-top{display:flex; justify-content:space-between; gap:40px; flex-wrap:wrap; padding-bottom:40px; border-bottom:1px solid var(--line);}
+  .footer-top p{color:var(--ink-soft); font-size:0.9rem; max-width:280px;}
+  .footer-cols{display:flex; gap:64px; flex-wrap:wrap;}
+  .footer-col h4{font-size:0.72rem; font-family:'IBM Plex Mono',monospace; letter-spacing:0.1em; text-transform:uppercase; color:var(--madder); margin-bottom:16px; font-weight:500;}
+  .footer-col a{display:block; font-size:0.9rem; color:var(--ink-soft); margin-bottom:10px;}
+  .footer-col a:hover{color:var(--madder);}
+  .footer-bottom{display:flex; justify-content:space-between; padding-top:24px; flex-wrap:wrap; gap:10px; font-size:0.76rem; font-family:'IBM Plex Mono',monospace; color:var(--ink-soft);}
+
+  .wa-float{
+    position:fixed; bottom:26px; right:26px; z-index:90; background:var(--madder); color:var(--paper);
+    width:56px; height:56px; border-radius:50%; display:flex; align-items:center; justify-content:center;
+    box-shadow:0 10px 24px rgba(156,59,46,0.35); transition:transform .25s ease;
+  }
+  .wa-float:hover{transform:scale(1.08);}
+
+  @media (max-width:920px){
+    .hero-inner{grid-template-columns:1fr; padding:20px 0 40px;}
+    .mirror-panel{order:-1; max-width:280px;}
+    .menu-grid{grid-template-columns:1fr;}
+    .ritual-feature .wrap{grid-template-columns:1fr;}
+    .cards{grid-template-columns:1fr;}
+    .loc-grid{grid-template-columns:1fr;}
+  }
+  @media (max-width:760px){
+    .nav-links{
+      position:fixed; top:64px; left:0; right:0; background:var(--paper);
+      flex-direction:column; align-items:flex-start; padding:20px clamp(20px,5vw,64px);
+      border-bottom:1px solid var(--line); transform:translateY(-130%); transition:transform .3s ease; gap:18px;
+    }
+    .nav-links.open{transform:translateY(0);}
+    .menu-toggle{display:flex;}
+    .nav .btn.outline{display:none;}
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="nav">
+    <div class="logo">BINORI<span>.</span></div>
+    <nav class="nav-links" id="navLinks">
+      <a href="#menu">Menu</a>
+      <a href="#signature">The Ritual</a>
+      <a href="#visit">Locations</a>
+    </nav>
+    <div style="display:flex; gap:12px; align-items:center;">
+      <a href="#visit" class="btn outline">Find a branch</a>
+      <a href="https://wa.me/923211234567?text=Hi%20Binori%2C%20I%27d%20like%20to%20book%20an%20appointment" class="btn">Book on WhatsApp</a>
+      <button class="menu-toggle" id="menuToggle" aria-label="Toggle menu"><span></span><span></span><span></span></button>
+    </div>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="ajrak-band top"></div>
+  <div class="wrap hero-inner">
+    <div>
+      <p class="eyebrow">Binori Town · Clifton · DHA — Karachi</p>
+      <h1 style="margin-top:14px;">Care with the same<br>precision as a <em>block print</em>.</h1>
+      <p class="lede">No two ajrak prints are pressed the same way twice, yet every one comes out exact. Binori treats every facial, hammam and blow-dry the same way — measured, unhurried, repeatable.</p>
+      <div class="hero-actions">
+        <a href="https://wa.me/923211234567?text=Hi%20Binori%2C%20I%27d%20like%20to%20book%20an%20appointment" class="btn rust">Book an appointment</a>
+        <a href="#menu" class="btn outline">See the full menu</a>
+      </div>
+      <div class="hero-meta">
+        <div><b>3</b><small>BRANCHES IN KARACHI</small></div>
+        <div><b>2011</b><small>FIRST OPENED, BINORI TOWN</small></div>
+        <div><b>Rs 1,500+</b><small>SERVICES FROM</small></div>
+      </div>
+    </div>
+    <div class="mirror-panel" id="mirrorPanel">
+      <!-- 36 mirror tiles generated by JS -->
+    </div>
+  </div>
+  <div class="ajrak-band bottom"></div>
+</section>
+
+<div class="ticker-band">
+  <div class="ticker-track">
+    <span>Facial</span><span>Hammam</span><span>Threading</span><span>Hair spa</span><span>Bridal</span><span>Manicure</span><span>Keratin</span>
+    <span>Facial</span><span>Hammam</span><span>Threading</span><span>Hair spa</span><span>Bridal</span><span>Manicure</span><span>Keratin</span>
+  </div>
+</div>
+
+<section class="menu-section" id="menu">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <div><p class="eyebrow">The menu</p><h2>Book by treatment</h2></div>
+      <p>Every price is fixed and posted at the counter — no upsells once you're in the chair.</p>
+    </div>
+    <div class="menu-grid">
+      <div>
+        <div class="menu-cat reveal">
+          <div class="cat-label"><span class="diamond"></span><h3>Hammam &amp; Body</h3></div>
+          <div class="menu-item"><div><div class="name">Binori Signature Hammam</div><div class="desc">Steam, salt scrub, clay mask, oil massage — 100 min</div></div><div class="price">Rs 7,800</div></div>
+          <div class="menu-item"><div><div class="name">Tan Removal Body Polish</div><div class="desc">Gram flour, yogurt and lemon scrub, 50 min</div></div><div class="price">Rs 3,900</div></div>
+          <div class="menu-item"><div><div class="name">Back &amp; Shoulder Massage</div><div class="desc">Warm oil deep-tissue release, 30 min</div></div><div class="price">Rs 2,800</div></div>
+        </div>
+        <div class="menu-cat reveal">
+          <div class="cat-label"><span class="diamond" style="background:var(--indigo)"></span><h3>Bridal Studio</h3></div>
+          <div class="menu-item"><div><div class="name">Dulhan Package — 3 sittings</div><div class="desc">Facial, hair trial, full makeup, over two weeks</div></div><div class="price">Rs 42,000</div></div>
+          <div class="menu-item"><div><div class="name">Bridal Mehndi, Hands &amp; Feet</div><div class="desc">Custom design, resident mehndi artist</div></div><div class="price">Rs 11,000</div></div>
+          <div class="menu-item"><div><div class="name">Guest Party Makeup</div><div class="desc">Per head, minimum 4 guests</div></div><div class="price">Rs 4,500</div></div>
+        </div>
+      </div>
+      <div>
+        <div class="menu-cat reveal">
+          <div class="cat-label"><span class="diamond" style="background:var(--ochre)"></span><h3>Hair &amp; Threading</h3></div>
+          <div class="menu-item"><div><div class="name">Amla Hair Spa</div><div class="desc">Deep conditioning wash and mask, 40 min</div></div><div class="price">Rs 3,200</div></div>
+          <div class="menu-item"><div><div class="name">Keratin Smoothening</div><div class="desc">Frizz control, lasts up to 4 months</div></div><div class="price">Rs 17,000</div></div>
+          <div class="menu-item"><div><div class="name">Threading — Brow &amp; Lip</div><div class="desc">15 minutes</div></div><div class="price">Rs 500</div></div>
+        </div>
+        <div class="menu-cat reveal">
+          <div class="cat-label"><span class="diamond" style="background:var(--madder)"></span><h3>Skin &amp; Facials</h3></div>
+          <div class="menu-item"><div><div class="name">Brightening Facial</div><div class="desc">Vitamin C and saffron, for dull skin, 50 min</div></div><div class="price">Rs 6,000</div></div>
+          <div class="menu-item"><div><div class="name">Clarifying Facial</div><div class="desc">Neem and tea tree for oily, acne-prone skin</div></div><div class="price">Rs 5,400</div></div>
+          <div class="menu-item"><div><div class="name">Classic Facial</div><div class="desc">Gram flour, turmeric and rose — the everyday one</div></div><div class="price">Rs 3,500</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="ritual-feature" id="signature">
+  <div class="wrap">
+    <div class="reveal">
+      <p class="eyebrow">Our signature</p>
+      <h2>The Binori Ritual</h2>
+      <p class="lede">Four steps, always in this order, always the same length of time — the way a good ajrak print never skips a stage of the dye.</p>
+      <div class="hero-actions" style="margin-top:30px;">
+        <a href="https://wa.me/923211234567?text=Hi%20Binori%2C%20I%27d%20like%20to%20book%20the%20Signature%20Ritual" class="btn rust">Book this ritual</a>
+      </div>
+    </div>
+    <div class="steps reveal">
+      <div class="step"><div class="num">01</div><div><h4>Steam</h4><p>12 minutes in the steam room to open pores before any product touches skin.</p></div></div>
+      <div class="step"><div class="num">02</div><div><h4>Salt &amp; clay scrub</h4><p>Full-body exfoliation to lift dead skin and sun tan.</p></div></div>
+      <div class="step"><div class="num">03</div><div><h4>Rose clay mask</h4><p>Left to set for 20 minutes while you're handed chai.</p></div></div>
+      <div class="step"><div class="num">04</div><div><h4>Warm oil massage</h4><p>Almond and sesame oil, slow strokes, to close the session.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<section class="testimonial-section">
+  <div class="wrap">
+    <div class="section-head reveal"><div><p class="eyebrow">In their words</p><h2>From our regulars</h2></div></div>
+    <div class="cards">
+      <div class="postcard reveal"><div class="stars">★★★★★</div><div class="quote">"Same girl has done my hair for six years now. She knows exactly how I like my blow-dry without me saying a word."</div><div class="who">— Zara, Clifton</div></div>
+      <div class="postcard reveal"><div class="stars">★★★★★</div><div class="quote">"Did my full bridal package here. Zero last-minute surprises, and my skin actually looked rested on the day."</div><div class="who">— Hira, DHA Phase 5</div></div>
+      <div class="postcard reveal"><div class="stars">★★★★★</div><div class="quote">"Prices are posted at the counter, no negotiating, no surprise add-ons at checkout. Rare in this city."</div><div class="who">— Faiza, Binori Town</div></div>
+    </div>
+  </div>
+</section>
+
+<section class="locations" id="visit">
+  <div class="wrap">
+    <div class="section-head reveal"><div><p class="eyebrow">Visit us</p><h2>Three branches, one standard</h2></div></div>
+    <div class="loc-grid">
+      <div class="loc-card flagship reveal"><h3>Binori Town <span class="flagship-tag">Flagship</span></h3><div class="addr">Plot 4-C, Sector 11-A, Binori Town</div><div class="hours"><b>Mon–Sat</b> 10am – 8pm<br><b>Sun</b> 11am – 6pm</div></div>
+      <div class="loc-card reveal"><h3>Clifton</h3><div class="addr">Block 5, Khayaban-e-Roomi</div><div class="hours"><b>Mon–Sat</b> 10am – 8pm<br><b>Sun</b> 11am – 6pm</div></div>
+      <div class="loc-card reveal"><h3>DHA Phase 5</h3><div class="addr">26th Street, off Khayaban-e-Bukhari</div><div class="hours"><b>Mon–Sat</b> 10am – 8pm<br><b>Sun</b> Closed</div></div>
+    </div>
+  </div>
+</section>
+
+<section class="cta-band">
+  <div class="wrap">
+    <p class="eyebrow" style="color:var(--ochre-soft);">Ready when you are</p>
+    <h2>Send a message, we'll hold your slot.</h2>
+    <p>Most of our regulars book straight on WhatsApp — no app, no account, just a chat with the front desk.</p>
+    <div class="cta-actions">
+      <a href="https://wa.me/923211234567?text=Hi%20Binori%2C%20I%27d%20like%20to%20book%20an%20appointment" class="btn rust">Message us on WhatsApp</a>
+      <a href="tel:+922112345678" class="btn outline" style="color:var(--paper); border-color:rgba(251,247,239,0.5);">Call a branch</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="footer-top">
+      <div>
+        <div class="logo">BINORI<span>.</span></div>
+        <p>A spa and salon built on precision and repeatability — the same standard, ajrak-block-print exact, at every branch.</p>
+      </div>
+      <div class="footer-cols">
+        <div class="footer-col">
+          <h4>Explore</h4>
+          <a href="#menu">Menu</a>
+          <a href="#signature">Signature Ritual</a>
+          <a href="#visit">Locations</a>
+        </div>
+        <div class="footer-col">
+          <h4>Connect</h4>
+          <a href="https://wa.me/923211234567">WhatsApp</a>
+          <a href="tel:+922112345678">+92 21 1234 5678</a>
+          <a href="#">Instagram @binori.pk</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 Binori Spa &amp; Salon. Demo website — all names, numbers and addresses are fictional.</span>
+      <span>Binori Town · Clifton · DHA — Karachi</span>
+    </div>
+  </div>
+</footer>
+
+<a class="wa-float" href="https://wa.me/923211234567?text=Hi%20Binori%2C%20I%27d%20like%20to%20book%20an%20appointment" aria-label="Book on WhatsApp">
+  <svg width="26" height="26" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M17.5 14.4c-.3-.1-1.6-.8-1.9-.9-.3-.1-.4-.1-.6.1-.2.3-.7.9-.8 1-.1.2-.3.2-.6.1-.3-.1-1.2-.5-2.3-1.5-.9-.8-1.4-1.7-1.6-2-.2-.3 0-.5.1-.6.1-.1.3-.3.4-.5.1-.1.2-.3.3-.4.1-.2 0-.4 0-.5 0-.1-.6-1.5-.8-2-.2-.5-.4-.4-.6-.4h-.5c-.2 0-.5.1-.7.3-.2.3-.9.9-.9 2.1s1 2.5 1.1 2.6c.1.2 2 3 4.7 4.2.7.3 1.2.5 1.6.6.7.2 1.3.2 1.8.1.5-.1 1.6-.7 1.9-1.3.2-.6.2-1.1.2-1.2 0-.1-.2-.2-.5-.3z" fill="#FBF7EF"/>
+    <path d="M12 2a10 10 0 0 0-8.5 15.2L2 22l4.9-1.5A10 10 0 1 0 12 2zm0 18.2c-1.6 0-3.1-.4-4.5-1.2l-.3-.2-3 .9.9-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2z" fill="#FBF7EF"/>
+  </svg>
+</a>
+
+<script>
+  const toggle = document.getElementById('menuToggle');
+  const navLinks = document.getElementById('navLinks');
+  toggle.addEventListener('click', () => navLinks.classList.toggle('open'));
+  navLinks.querySelectorAll('a').forEach(a => a.addEventListener('click', () => navLinks.classList.remove('open')));
+
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+  }, { threshold: 0.15 });
+  document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+
+  // build mirror grid
+  const mirrorPanel = document.getElementById('mirrorPanel');
+  for (let i = 0; i < 36; i++) {
+    const m = document.createElement('div');
+    m.className = 'mirror';
+    mirrorPanel.appendChild(m);
+  }
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const canHover = window.matchMedia('(hover: hover)').matches;
+  if (canHover) {
+    mirrorPanel.addEventListener('mousemove', (e) => {
+      const rect = mirrorPanel.getBoundingClientRect();
+      const mx = ((e.clientX - rect.left) / rect.width) * 100;
+      const my = ((e.clientY - rect.top) / rect.height) * 100;
+      mirrorPanel.style.setProperty('--mx', mx + '%');
+      mirrorPanel.style.setProperty('--my', my + '%');
+      mirrorPanel.querySelectorAll('.mirror').forEach(m => {
+        m.style.setProperty('--mx', mx + '%');
+        m.style.setProperty('--my', my + '%');
+      });
+    });
+  } else if (!reduceMotion) {
+    let t = 0;
+    setInterval(() => {
+      t += 0.01;
+      const mx = 50 + Math.sin(t) * 30;
+      const my = 50 + Math.cos(t * 0.8) * 30;
+      mirrorPanel.querySelectorAll('.mirror').forEach(m => {
+        m.style.setProperty('--mx', mx + '%');
+        m.style.setProperty('--my', my + '%');
+      });
+    }, 60);
+  }
+</script>
+
+</body>
+</html>
